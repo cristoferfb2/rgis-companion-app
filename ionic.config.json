@@ -1,0 +1,8 @@
+{
+  "name": "RGIS Companion App",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "c6baca0a"
+}
