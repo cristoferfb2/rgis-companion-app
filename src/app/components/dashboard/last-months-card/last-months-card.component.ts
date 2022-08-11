@@ -22,7 +22,15 @@ export class LastMonthsCardComponent implements OnInit {
     },
     scales: {
       y: {
+        grid: {
+          display: false,
+        },
         display: false
+      },
+      x: {
+        grid: {
+          display: false
+        }
       }
     },
     animation: {
@@ -51,7 +59,8 @@ export class LastMonthsCardComponent implements OnInit {
       datasets: [{
         label: 'Ingresos',
         data: history,
-        backgroundColor: '#990033'
+        backgroundColor: '#990033',
+        minBarLength: 15
       }],
       skipNull: true
     };

@@ -10,7 +10,7 @@ import {
   trigger('fader', [
     transition('* <=> *', [
       // Set a default  style for enter and leave
-      query(':enter, :leave', [
+      query(':leave', [
         style({
           position: 'absolute',
           left: 0,
