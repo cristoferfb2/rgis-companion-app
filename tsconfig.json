@@ -4,6 +4,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "@ng-bootstrap/ng-bootstrap": ["../src"]
+    },
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,

@@ -1,26 +1,21 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HasDataGuard } from './guards/has-data.guard';
+import { IsLoginGuard } from './guards/is-login.guard';
+import { LoaderComponent } from './components/loader/loader.component';
+import { LoginComponent } from './components/login/login.component';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: 'message/:id',
-    loadChildren: () => import('./view-message/view-message.module').then( m => m.ViewMessagePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
+  { path: '', component: DashboardComponent, canActivate: [ IsLoginGuard, HasDataGuard ] },
+  { path: 'login', component: LoginComponent },
+  { path: 'loading', component: LoaderComponent },
+  { path: 'search', component: SearchComponent }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

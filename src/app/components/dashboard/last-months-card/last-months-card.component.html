@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="card-body p-3">
+        <h5 class="card-title">Ultimos meses</h5>
+        <div class="d-flex justify-content-center">
+            <canvas *ngIf="!chartImage"
+                baseChart
+                [data]="historyIncome"
+                [options]="chartOptions"
+                [type]="'bar'"
+                >
+            </canvas>
+            <img *ngIf="chartImage" class="img-fluid" [src]="chartImage" alt="monthly chart">
+        </div>
+    </div>
+</div>

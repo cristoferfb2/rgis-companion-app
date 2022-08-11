@@ -1,0 +1,16 @@
+<div class="mynavbar d-flex justify-content-between align-items-center">
+    <i *ngIf='isSearch()' class="fa-solid fa-angle-left text-white fa-lg mx-2" (click)="back()"></i>
+
+    <img 
+        *ngIf='!isSearch()'
+        class="ml-2" 
+        src="/assets/R.png" 
+        alt="RGIS brand" 
+        width="45" 
+        height="45"
+    >
+    <div>
+        <i class="fa-solid fa-magnifying-glass text-white fa-lg mx-2" (click)="search()"></i>
+        <i *ngIf='!isSearch()' class="fa-solid fa-arrow-right-from-bracket text-white fa-lg mx-3" (click)="signout()"></i>
+    </div>
+</div>
