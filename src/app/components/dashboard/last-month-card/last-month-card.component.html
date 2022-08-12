@@ -1,6 +1,15 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Ingreso mes anterior <small class="text-muted">(Bruto)</small></h5>
-        <h1>$ {{ incomeLastMonth }}</h1>
+        <div class="container text-center py-2">
+            <h1>
+                <i class="fa-regular fa-money-bill-1 me-2"></i> ${{ incomeLastMonth }} 
+                <small style="font-size: .7em; opacity: .7" [class.text-success]="deltaLastMonth > 0" [class.text-danger]="deltaLastMonth < 0">
+                    <i class="fa-regular fa-circle-down" *ngIf="deltaLastMonth < 0"></i> 
+                    <i class="fa-regular fa-circle-up" *ngIf="deltaLastMonth > 0"></i> 
+                    {{ deltaLastMonth }}%
+                </small>
+            </h1>
+        </div>
     </div>
 </div>

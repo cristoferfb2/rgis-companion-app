@@ -8,15 +8,9 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Total Mes</h5>
-                    <div class="row">
-                        <div class="col col-auto pt-1">
-                            <h2 style="font-size: 2rem;"><i class="fa-regular fa-money-bill-1"></i></h2>
-                            <h2 style="font-size: 2rem;"><i class="fa-regular fa-clock"></i></h2>
-                        </div>
-                        <div class="col p-0">
-                            <h2 style="font-size: 2rem;" *ngIf="monthData">{{ formatMoney(monthData.total, true) }} <small class="text-muted">Pesos</small></h2>
-                            <h2 style="font-size: 2rem;" *ngIf="monthData">{{ monthData.hours.toString().replace('.', ',') }} <small class="text-muted">Horas</small></h2>
-                        </div>
+                    <div class="container-fluid text-center">
+                        <h1><i class="fa-regular fa-money-bill-1 me-2"></i> ${{ formatMoney(monthData.total, true) }} <small class="text-muted">Pesos</small></h1>
+                        <h1><i class="fa-regular fa-clock me-2"></i> {{ monthData.hours.toString().replace('.', ',') }} <small class="text-muted">Horas</small></h1>
                     </div>
                 </div>
             </div>
