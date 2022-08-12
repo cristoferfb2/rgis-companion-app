@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
+import { SearchService } from 'src/app/services/search.service';
 import { DataService } from '../../services/data.service';
 
 @Component({
@@ -11,12 +13,26 @@ import { DataService } from '../../services/data.service';
 export class LoaderComponent implements OnInit, OnDestroy {
   private dataSub!: Subscription;
 
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(
+    private dataService: DataService, 
+    private router: Router, 
+    private route: ActivatedRoute,
+    private searchService: SearchService
+  ) { }
 
 
   ngOnInit(): void {
-    if (this.dataService.hasData) {
 
+
+    if (this.dataService.hasData) {
+      this.route.queryParams
+        .subscribe(data => 
+          this.searchService.loadData(moment(data.date, 'DD-MM-YYYY').toDate())
+            .then(()=>{
+              this.router.navigateByUrl('search');
+            })
+            .catch(err=>console.log(err))
+        );
       return
     }
 

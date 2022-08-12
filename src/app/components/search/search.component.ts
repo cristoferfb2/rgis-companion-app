@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import { SearchService } from 'src/app/services/search.service';
 import { MonthData } from '../../class/MonthData';
 import { DataService } from '../../services/data.service';
 
@@ -14,19 +15,12 @@ export class SearchComponent implements OnInit {
   public date!: Date;
   public displayedColumns = ['customer', 'dateIn', 'total', 'actions'];
   
-  constructor(private route: ActivatedRoute, private dataService: DataService) { }
+  constructor(private searchService: SearchService) { }
 
   ngOnInit(): void {
-    this.route.queryParams
-      .subscribe(data => this.loadData(moment(data.date, 'DD-MM-YYYY').toDate()));
-  }
-
-  loadData (date: Date) {
-    this.date = date;
-    this.dataService.getMonth(date.getMonth()+1, date.getFullYear())
-      .then(monthData=>{
-        this.monthData = monthData;
-      }).catch(err=>console.log(err))
+    this.monthData = this.searchService.data;
+    this.date = this.searchService.date;
+    this.searchService.clean();
   }
 
   formatDate (date: Date) {
@@ -37,10 +31,6 @@ export class SearchComponent implements OnInit {
     let prefix= '';
     if (!header) prefix += '$'
     return prefix + parseInt(val.toString()).toLocaleString().replace(',', '.');
-  }
-
-  onRowClick (row: any) {
-    console.log(row);
   }
 
   get dateMonth () {

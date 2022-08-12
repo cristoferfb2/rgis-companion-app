@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, Host, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { MatCalendar, MatDatepicker } from '@angular/material/datepicker';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { BackButtonService } from 'src/app/services/back-button.service';
@@ -31,7 +30,7 @@ export class NavbarComponent implements OnInit {
     this.backButtonService.modal = modalRef;
     modalRef.closed
       .subscribe(month => {
-        this.router.navigate(['/search'], { 
+        this.router.navigate(['/loading'], { 
           queryParams: {
             date:  moment(month).format('DD-MM-YYYY')
           }

@@ -6,12 +6,13 @@ import { IsLoginGuard } from './guards/is-login.guard';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoginComponent } from './components/login/login.component';
 import { SearchComponent } from './components/search/search.component';
+import { SearchGuard } from './guards/search.guard';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [ IsLoginGuard, HasDataGuard ] },
   { path: 'login', component: LoginComponent },
   { path: 'loading', component: LoaderComponent },
-  { path: 'search', component: SearchComponent }
+  { path: 'search', component: SearchComponent, canActivate: [ SearchGuard ] }
 ];
 
 @NgModule({
