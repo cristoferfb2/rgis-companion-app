@@ -23,6 +23,7 @@ import { SearchComponent } from './components/search/search.component';
 import {MatTableModule} from '@angular/material/table';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
+import { WorksListComponent } from './components/commons/works-list/works-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
     NavbarComponent,
     LogoutModalComponent,
     SearchModalComponent,
-    SearchComponent
+    SearchComponent,
+    WorksListComponent
   ],
   imports: [
     BrowserModule,

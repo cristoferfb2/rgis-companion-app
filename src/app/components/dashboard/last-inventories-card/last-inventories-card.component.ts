@@ -22,15 +22,4 @@ export class LastInventoriesCardComponent implements OnInit {
   
     return last.slice(0, 5);
   }
-
-  public getShortDate(date: Date): string {
-    let momentDate = moment(date);
-
-    return momentDate.format('DD-MM-YYYY HH:mm')
-  }
-
-  public prettyPrice (val: number): string {
-    return parseInt(val.toString()).toLocaleString().replace(',', '.')
-  }
-
 }

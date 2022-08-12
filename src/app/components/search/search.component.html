@@ -7,14 +7,15 @@
         <div class="col-sm p-2">
             <div class="card">
                 <div class="card-body">
+                    <h5 class="card-title">Total Mes</h5>
                     <div class="row">
-                        <div class="col col-auto">
-                            <h2 style="font-size: 2rem;"><i class="fa-solid fa-money-bill"></i></h2>
-                            <h2 style="font-size: 2rem;"><i class="fa-solid fa-clock"></i></h2>
+                        <div class="col col-auto pt-1">
+                            <h2 style="font-size: 2rem;"><i class="fa-regular fa-money-bill-1"></i></h2>
+                            <h2 style="font-size: 2rem;"><i class="fa-regular fa-clock"></i></h2>
                         </div>
                         <div class="col p-0">
-                            <h2 style="font-size: 2rem;" *ngIf="monthData">{{ formatMoney(monthData.total, true) }} Pesos</h2>
-                            <h2 style="font-size: 2rem;" *ngIf="monthData">{{ monthData.hours.toString().replace('.', ',') }} Horas</h2>
+                            <h2 style="font-size: 2rem;" *ngIf="monthData">{{ formatMoney(monthData.total, true) }} <small class="text-muted">Pesos</small></h2>
+                            <h2 style="font-size: 2rem;" *ngIf="monthData">{{ monthData.hours.toString().replace('.', ',') }} <small class="text-muted">Horas</small></h2>
                         </div>
                     </div>
                 </div>
@@ -23,31 +24,8 @@
         <div class="col-sm p-2">
             <div class="card">
                 <div class="card-body">
-                    <table mat-table [dataSource]="monthData.works" class="w-100" *ngIf="monthData">
-                        <ng-container matColumnDef="customer">
-                            <th mat-header-cell *matHeaderCellDef> Tienda </th>
-                            <td mat-cell *matCellDef="let element" class="text-truncate" style="max-width: 35vw;"> {{ element.customer }} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="dateIn">
-                            <th mat-header-cell *matHeaderCellDef> Fecha </th>
-                            <td mat-cell *matCellDef="let element"> {{ formatDate(element.dateIn) }} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="total">
-                            <th mat-header-cell *matHeaderCellDef> Total </th>
-                            <td mat-cell *matCellDef="let element"> {{ formatMoney(element.wageRate*element.hours) }} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="actions">
-                            <th mat-header-cell *matHeaderCellDef> </th>
-                            <td mat-cell *matCellDef="let element"> <i class="fa-solid fa-circle-info"></i> </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr
-                            mat-row 
-                            *matRowDef="let row; columns: displayedColumns;"
-                            (click)="onRowClick(row)"
-                        ></tr>
-                    </table>
+                    <h5 class="card-title">Inventarios</h5>
+                    <app-works-list [works]="monthData.works"></app-works-list>
                 </div>
             </div>
         </div>
