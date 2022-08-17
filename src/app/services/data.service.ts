@@ -20,16 +20,16 @@ export class DataService {
   // get user ID from local storage
   public getUserID (): string | null {
     if (this.userID) return this.userID
-
-    this.userID = localStorage.getItem('ETQID') as string;
+    this.userID = localStorage.getItem('ETQID');
     return this.userID
   }
 
   // check for data
   public hasData (): boolean {
-    if (this.data.length > 0) return true
+    if (this.data && this.data.length > 0) return true
     this.data = JSON.parse(localStorage.getItem('data'));
-    if(this.data.length > 0) return true
+    if(this.data && this.data.length > 0) return true
+    console.log('Es Falso prro');
     return false
   }
 
@@ -124,7 +124,6 @@ export class DataService {
           'Access-Control-Allow-Origin': '*',
         }
       ).then(response => {
-          console.log(response);
           let data = this.parseMonth(response.data, month, year);
           if (!data) reject(false);
           resolve(data as MonthData);
@@ -176,5 +175,13 @@ export class DataService {
     monthData.total = parseFloat(totals[3])*1000
     
     return monthData;
+  }
+
+  // clear all data for logout
+  public clear (): void {
+    this.userID = undefined;
+    this.data = undefined;
+    this.userName = undefined;
+    localStorage.clear();
   }
 }

@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { BackButtonService } from 'src/app/services/back-button.service';
 import { LogoutModalComponent } from './logout-modal/logout-modal.component';
 import { SearchModalComponent } from './search-modal/search-modal.component';
+import { NativePageTransitions } from '@awesome-cordova-plugins/native-page-transitions/ngx';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,21 +17,24 @@ export class NavbarComponent implements OnInit {
   constructor(
     private modalService: NgbModal, 
     private router: Router, 
-    private backButtonService: BackButtonService
+    private backButtonService: BackButtonService,
+    private nativePageTransitions: NativePageTransitions,
+    private dataService: DataService
   ) { }
 
   ngOnInit(): void {
   }
 
-  isSearch () {
+  public isSearch (): boolean {
     return this.router.url.includes('search');
   }
 
-  search (): void {
+  public search (): void {
     const modalRef = this.modalService.open(SearchModalComponent);
     this.backButtonService.modal = modalRef;
     modalRef.closed
       .subscribe(month => {
+        this.nativePageTransitions.slide({direction: 'left'});
         this.router.navigate(['/loading'], { 
           queryParams: {
             date:  moment(month).format('DD-MM-YYYY')
@@ -39,18 +44,19 @@ export class NavbarComponent implements OnInit {
       });
   }
 
-  back () {
+  public back (): void {
+    this.nativePageTransitions.slide({direction: 'right'});
     this.router.navigate(['/']);
   }
 
-  signout(): void {
+  public signout(): void {
     const modalRef = this.modalService.open(LogoutModalComponent);
     modalRef.closed.subscribe(response=> {
       if (response) {
-        localStorage.clear();
+        this.dataService.clear();
+        this.nativePageTransitions.slide({direction: 'right'});
         this.router.navigate(['/login'])
       }
     });
   }
-
 }

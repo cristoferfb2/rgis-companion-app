@@ -25,6 +25,7 @@ import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
 import { WorksListComponent } from './components/commons/works-list/works-list.component';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+import { NativePageTransitions } from '@awesome-cordova-plugins/native-page-transitions/ngx';
 
 
 @NgModule({
@@ -54,7 +55,7 @@ import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/n
     MatNativeDateModule,
     MatTableModule
   ],
-  providers: [ HTTP, StatusBar, ScreenOrientation ],
+  providers: [ HTTP, StatusBar, ScreenOrientation, NativePageTransitions ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

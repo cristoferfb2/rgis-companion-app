@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NativePageTransitions } from '@awesome-cordova-plugins/native-page-transitions/ngx';
 import { DataService } from '../../services/data.service';
 
 interface LoginForm {
@@ -15,7 +16,11 @@ interface LoginForm {
 export class LoginComponent implements OnInit {
   public errorMsg!: string;
   public loading = false;
-  constructor(public dataService: DataService, public router: Router) { }
+  constructor(
+    public dataService: DataService, 
+    public router: Router,
+    private nativePageTransitions: NativePageTransitions
+  ) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +30,10 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.dataService.saveUserID(formValue.userID)
       .subscribe({
-        next: () => this.router.navigate(['loading']),
+        next: () => {
+          this.nativePageTransitions.slide({direction: 'left'});
+          this.router.navigate(['loading'])
+        },
         error: err => {
           this.errorMsg = err;
           this.loading = false;

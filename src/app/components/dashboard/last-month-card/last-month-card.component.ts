@@ -11,7 +11,6 @@ export class LastMonthCardComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    console.log(this);
   }
 
   get incomeLastMonth (): string {
